@@ -37,9 +37,7 @@ function SignUp() {
         setMessage(failData.message);
       } else {
         const data = await responce.json();
-        localStorage.setItem("token", data.token);
-        setMessage("");
-        navigate("/");
+        setMessage(data.message);
       }
     },
   });
@@ -152,6 +150,8 @@ function SignUp() {
             <button
               type="submit"
               className="bg-slate-800 px-3 py-2 rounded-md text-lg font-semibold text-white hover:bg-slate-900 duration-200"
+              disabled={formik.isSubmitting}
+              onClick={() => setMessage("Loading...")}
             >
               Create account
             </button>
