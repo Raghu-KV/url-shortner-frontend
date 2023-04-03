@@ -5,11 +5,15 @@ import ForgetPassword from "./pages/ForgetPassword";
 import PasswordResetLink from "./pages/PasswordResetLink";
 import { Routes, Route } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
+
 function App() {
   return (
-    <div className="min-h-screen bg-slate-800">
+    <div className="h-screen bg-slate-900">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+        </Route>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<Login />} />
         <Route path="/forget-password" element={<ForgetPassword />} />

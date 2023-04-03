@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function Home() {
-  const [userName, setUserName] = useState("");
+  const [userData, setUserData] = useState("");
   const navigate = useNavigate();
 
-  const getUserName = async () => {
+  const getUserData = async () => {
     const localStorageToken = localStorage.getItem("token");
 
     const responce = await fetch("http://localhost:4000/who-has-logged-in", {
@@ -16,19 +17,15 @@ function Home() {
       navigate("/log-in");
     } else {
       const data = await responce.json();
-      setUserName(data);
+      setUserData(data);
     }
   };
 
   useEffect(() => {
-    getUserName();
+    getUserData();
   }, []);
 
-  return (
-    <div>
-      <h1 className="text-white font-bold text-center text-2xl pt-12">{`you have logged in as: ${userName.userName}`}</h1>
-    </div>
-  );
+  return <h1>this is home</h1>;
 }
 
 export default Home;
