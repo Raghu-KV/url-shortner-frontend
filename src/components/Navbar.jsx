@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineMenuAlt3, HiX, HiLogout } from "react-icons/hi";
 import { useState } from "react";
+import { useRef, useEffect } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -12,6 +13,21 @@ function Navbar() {
     localStorage.removeItem("token");
     navigate("/log-in");
   };
+
+  const mobileNavRef = useRef();
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!mobileNavRef.current.contains(event.target)) {
+        setOpenNav(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  }, []);
 
   return (
     <>
@@ -48,12 +64,14 @@ function Navbar() {
               <HiOutlineMenuAlt3 size={"30px"} />
             )}
           </div>
+          {/*  */}
 
           <ul
             className={`h-screen absolute w-4/6 bg-slate-700  right-0 top-0 ${
               openNav ? "translate-x-0" : "translate-x-full"
             } transition-all ease-out duration-300 text-white flex flex-col gap-2 font-semibold items-center justify-center
             text-xl`}
+            ref={mobileNavRef}
           >
             <li className="">
               <Link to="/">Dashboard</Link>
@@ -70,6 +88,8 @@ function Navbar() {
               Logout
             </li>
           </ul>
+
+          {/*  */}
         </div>
       </div>
       <Outlet />
