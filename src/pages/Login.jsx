@@ -12,7 +12,7 @@ function Login() {
   const formik = useFormik({
     initialValues: {
       userName: "",
-      email: "",
+
       password: "",
     },
     validationSchema: yup.object({

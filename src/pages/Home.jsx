@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 function Home() {
   const [userData, setUserData] = useState("");
+  const [shortUrl, setShortUrl] = useState("");
   const navigate = useNavigate();
 
   const getUserData = async () => {
@@ -29,6 +30,8 @@ function Home() {
 
   // console.log(userData);
 
+  const token = localStorage.getItem("token");
+
   const formik = useFormik({
     initialValues: {
       url: "",
@@ -42,8 +45,22 @@ function Home() {
         )
         .required("Please enter a Link!"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      const responce = await fetch(
+        `http://localhost:4000/short-this-url/${userData._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": token,
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      const data = await responce.json();
+      setShortUrl(data);
+      //console.log(shortUrl);
     },
   });
 
@@ -73,13 +90,23 @@ function Home() {
 
           <button
             type="submit"
-            className=" px-6 py-3 font-semibold bg-green-600 rounded-lg hover:scale-105 transition-all duration-100 "
+            className=" px-6 py-3 font-semibold bg-green-600 rounded-lg hover:scale-105 transition-all duration-100"
+            disabled={formik.isSubmitting}
           >
             Shrink
           </button>
         </form>
         {formik.touched.url && formik.errors.url && (
           <p className="text-red-500 pt-2 font-semibold">{formik.errors.url}</p>
+        )}
+      </div>
+      <div className="bg-slate-700 px-3 py-4 mx-3 my-5 text-white rounded-lg ">
+        {shortUrl.shortUrl ? (
+          <a href={shortUrl.shortUrl} className="font-semibold cursor-pointer">
+            {shortUrl.shortUrl}
+          </a>
+        ) : (
+          "your short URL appears here..."
         )}
       </div>
     </div>
