@@ -102,11 +102,15 @@ function Home() {
       </div>
       <div className="bg-slate-700 px-3 py-4 mx-3 my-5 text-white rounded-lg ">
         {shortUrl.shortUrl ? (
-          <a href={shortUrl.shortUrl} className="font-semibold cursor-pointer">
+          <a
+            href={shortUrl.shortUrl}
+            className="font-semibold cursor-pointer text-yellow-400"
+            target="_blank"
+          >
             {shortUrl.shortUrl}
           </a>
         ) : (
-          "your short URL appears here..."
+          <span className="opacity-50">your short URL appears here...</span>
         )}
       </div>
     </div>
