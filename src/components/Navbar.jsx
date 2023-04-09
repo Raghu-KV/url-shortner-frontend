@@ -51,10 +51,10 @@ function Navbar() {
             <li className="py-2">
               <Link to="/yourUrls">Your URLs</Link>
             </li>
-            <li className="py-2">
+            {/* <li className="py-2">
               {" "}
               <Link to="/statistics">Statistics</Link>
-            </li>
+            </li> */}
             <li
               onClick={logOut}
               className="cursor-pointer rounded-lg px-6 py-2 bg-slate-900 hover:scale-105 transition-all duration-100"
@@ -88,10 +88,10 @@ function Navbar() {
             <li className="" onClick={closeNav}>
               <Link to="/yourUrls">Your URLs</Link>
             </li>
-            <li onClick={closeNav}>
+            {/* <li onClick={closeNav}>
               {" "}
               <Link to="/statistics">Statistics</Link>
-            </li>
+            </li> */}
             <li
               onClick={logOut}
               className="cursor-pointer mt-10 rounded-lg px-6 py-2 bg-slate-900"
