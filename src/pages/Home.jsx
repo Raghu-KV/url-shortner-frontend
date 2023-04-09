@@ -8,11 +8,15 @@ import { URL } from "../BackEndURL";
 import { allDataContext } from "../Context";
 
 function Home() {
+  const localToken = localStorage.getItem("token");
+  const navigate = useNavigate();
+  if (!localToken) {
+    navigate("/log-in");
+  }
   const { userData, setUserData } = useContext(allDataContext);
 
   const [shortUrl, setShortUrl] = useState("");
   const [message, setMessage] = useState("your short URL appears here...");
-  const navigate = useNavigate();
 
   const getUserData = async () => {
     const localStorageToken = localStorage.getItem("token");
