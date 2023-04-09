@@ -38,7 +38,7 @@ function TableOfUrls() {
   useEffect(() => {
     urlData();
   }, []);
-  console.log(userData);
+  //console.log(userData);
 
   const urlData = async () => {
     const localStorageToken = localStorage.getItem("token");
@@ -51,7 +51,7 @@ function TableOfUrls() {
     const data = await responce.json();
     setAllUrlData(data);
   };
-  console.log(allUrlData);
+  //console.log(allUrlData);
 
   //urlData();
 

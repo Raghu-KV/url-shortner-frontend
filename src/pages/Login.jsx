@@ -27,7 +27,7 @@ function Login() {
         .required(" is required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      //console.log(values);
       const responce = await fetch(`${URL}/log-in`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

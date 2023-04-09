@@ -41,7 +41,7 @@ function Home() {
     getUserData();
   }, []);
 
-  console.log(userData);
+  //console.log(userData);
 
   const token = localStorage.getItem("token");
 
@@ -59,7 +59,7 @@ function Home() {
         .required("Please enter a Link!"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       const responce = await fetch(
         `${URL}/short-this-url/${userData.userName}`,
         {

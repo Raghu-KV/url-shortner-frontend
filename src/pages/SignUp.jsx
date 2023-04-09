@@ -27,7 +27,7 @@ function SignUp() {
         .required(" is required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      //console.log(values);
       const responce = await fetch(`${URL}/sign-up`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

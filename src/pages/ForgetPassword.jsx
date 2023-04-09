@@ -14,7 +14,7 @@ function ForgetPassword() {
       email: yup.string().email(" should be valid").required(" is required"),
     }),
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       const responce = await fetch(`${URL}/forget-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ function ForgetPassword() {
       } else {
         const data = await responce.json();
         setServrtMessage(data.message);
-        console.log(data);
+        //console.log(data);
       }
     },
   });
