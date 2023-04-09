@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { URL } from "../BackEndURL";
 
 function ForgetPassword() {
   const [severMessage, setServrtMessage] = useState("");
@@ -14,7 +15,7 @@ function ForgetPassword() {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      const responce = await fetch("http://localhost:4000/forget-password", {
+      const responce = await fetch(`${URL}/forget-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

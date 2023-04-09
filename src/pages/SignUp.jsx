@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { URL } from "../BackEndURL";
 
 function SignUp() {
   const [message, setMessage] = useState("");
@@ -27,7 +28,7 @@ function SignUp() {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      const responce = await fetch("http://localhost:4000/sign-up", {
+      const responce = await fetch(`${URL}/sign-up`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

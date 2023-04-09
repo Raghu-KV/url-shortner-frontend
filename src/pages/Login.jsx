@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { URL } from "../BackEndURL";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +28,7 @@ function Login() {
     }),
     onSubmit: async (values) => {
       console.log(values);
-      const responce = await fetch("http://localhost:4000/log-in", {
+      const responce = await fetch(`${URL}/log-in`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

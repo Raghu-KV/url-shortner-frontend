@@ -4,14 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineMenuAlt3, HiX, HiLogout } from "react-icons/hi";
 import { useState } from "react";
 import { useRef, useEffect } from "react";
+import { useContext } from "react";
+import { allDataContext } from "../Context";
 
 function Navbar() {
+  const { setUserData } = useContext(allDataContext);
   const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
 
   const logOut = () => {
     localStorage.removeItem("token");
     navigate("/log-in");
+    setUserData("");
   };
 
   const mobileNavRef = useRef();
@@ -29,9 +33,11 @@ function Navbar() {
     };
   }, []);
 
+  const closeNav = () => setOpenNav(false);
+
   return (
     <>
-      <div className="bg-slate-700 fixed w-screen">
+      <div className="bg-slate-700 fixed w-screen z-20">
         <div className="h-16 flex items-center justify-between container mx-auto">
           <div className="ml-5 md:ml-0">
             <h1 className="text-white font-bold text-2xl">
@@ -41,6 +47,9 @@ function Navbar() {
           <ul className="hidden text-white md:flex gap-4 font-semibold">
             <li className="py-2">
               <Link to="/">Dashboard</Link>
+            </li>
+            <li className="py-2">
+              <Link to="/yourUrls">Your URLs</Link>
             </li>
             <li className="py-2">
               {" "}
@@ -73,10 +82,13 @@ function Navbar() {
             text-xl`}
             ref={mobileNavRef}
           >
-            <li className="">
+            <li className="" onClick={closeNav}>
               <Link to="/">Dashboard</Link>
             </li>
-            <li>
+            <li className="" onClick={closeNav}>
+              <Link to="/yourUrls">Your URLs</Link>
+            </li>
+            <li onClick={closeNav}>
               {" "}
               <Link to="/statistics">Statistics</Link>
             </li>
