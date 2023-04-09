@@ -5,9 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 import { allDataContext } from "../Context";
 import { URL } from "../BackEndURL";
+
 function TableOfUrls() {
   const [allUrlData, setAllUrlData] = useState(["dummy"]);
-  const { userData } = useContext(allDataContext);
+
+  const { userData, getUserData } = useContext(allDataContext);
+
   const navigate = useNavigate();
 
   // const getUserData = async () => {
@@ -23,26 +26,35 @@ function TableOfUrls() {
   //   //console.log(data);
   // };
 
+  // const test = async () => {
+  //   // await getUserData();
+  //   await urlData();
+  // };
+
   // useEffect(() => {
-  //   getUserData();
+  //   test();
   // }, []);
+
+  useEffect(() => {
+    urlData();
+  }, []);
+  console.log(userData);
 
   const urlData = async () => {
     const localStorageToken = localStorage.getItem("token");
-
+    const localStorageUserName = localStorage.getItem("userName");
+    await getUserData();
     const responce = await fetch(
-      `${URL}/url-datas/table-of-urls?userName=${userData.userName}`,
+      `${URL}/url-datas/table-of-urls?userName=${localStorageUserName}`,
       { method: "GET", headers: { "x-auth-token": localStorageToken } }
     );
     const data = await responce.json();
     setAllUrlData(data);
   };
+  console.log(allUrlData);
 
   //urlData();
 
-  useEffect(() => {
-    urlData();
-  }, []);
   //console.log(allUrlData);
 
   if (allUrlData[0] === "dummy") {

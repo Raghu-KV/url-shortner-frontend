@@ -13,29 +13,29 @@ function Home() {
   if (!localToken) {
     navigate("/log-in");
   }
-  const { userData, setUserData } = useContext(allDataContext);
+  const { userData, setUserData, getUserData } = useContext(allDataContext);
 
   const [shortUrl, setShortUrl] = useState("");
   const [message, setMessage] = useState("your short URL appears here...");
 
-  const getUserData = async () => {
-    const localStorageToken = localStorage.getItem("token");
+  // const getUserData = async () => {
+  //   const localStorageToken = localStorage.getItem("token");
 
-    const responce = await fetch(`${URL}/who-has-logged-in`, {
-      method: "GET",
-      headers: { "x-auth-token": localStorageToken },
-    });
-    if (responce.status === 401) {
-      navigate("/log-in");
-    } else {
-      try {
-        const data = await responce.json();
-        setUserData(data);
-      } catch (error) {
-        navigate("/log-in");
-      }
-    }
-  };
+  //   const responce = await fetch(`${URL}/who-has-logged-in`, {
+  //     method: "GET",
+  //     headers: { "x-auth-token": localStorageToken },
+  //   });
+  //   if (responce.status === 401) {
+  //     navigate("/log-in");
+  //   } else {
+  //     try {
+  //       const data = await responce.json();
+  //       setUserData(data);
+  //     } catch (error) {
+  //       navigate("/log-in");
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     getUserData();

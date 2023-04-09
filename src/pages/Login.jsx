@@ -39,6 +39,7 @@ function Login() {
       } else {
         const data = await responce.json();
         localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.userName);
         setMessage("");
         navigate("/");
       }
