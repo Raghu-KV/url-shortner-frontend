@@ -1,1 +1,1 @@
-export const URL = "https://makeittiny.vercel.app";
+export const URL = "https://make-it-short.vercel.app/";
